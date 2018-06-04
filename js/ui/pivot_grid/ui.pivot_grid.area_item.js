@@ -22,9 +22,9 @@ var getRealElementWidth = function(element) {
     }
 
     if(width > 0) {
-        return width;
+        return DevExtremeIntegration.ApplyDashboardScaleCorrection(width); //HACK: поправка с учетом скейла дэшборда
     } else {
-        return element.offsetWidth;
+        return DevExtremeIntegration.ApplyDashboardScaleCorrection(element.offsetWidth); //HACK: поправка с учетом скейла дэшборда
     }
 };
 
@@ -272,9 +272,9 @@ exports.AreaItem = Class.inherit({
                 height = clientRect.height;
             }
             if(height > 0) {
-                return height;
+                return DevExtremeIntegration.ApplyDashboardScaleCorrection(height); //HACK: поправка с учетом скейла дэшборда
             } else {
-                return row.offsetHeight;
+                return DevExtremeIntegration.ApplyDashboardScaleCorrection(row.offsetHeight); //HACK: поправка с учетом скейла дэшборда
             }
         }
         return 0;
