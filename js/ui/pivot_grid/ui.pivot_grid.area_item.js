@@ -11,8 +11,8 @@ var PIVOTGRID_EXPAND_CLASS = "dx-expand";
 
 function applyDashboardZoomCorrection(value) {
     var zoom = window.visApi().getSheetZoom();
-    var scale = 100 / zoom;
-    return Math.floor(value / scale);
+    var invertedScale = 100 / zoom;
+    return Math.floor(value * invertedScale);
 }
 
 var getRealElementWidth = function(element) {
