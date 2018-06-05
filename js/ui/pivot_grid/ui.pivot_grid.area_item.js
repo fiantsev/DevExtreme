@@ -8,6 +8,13 @@ var $ = require("../../core/renderer"),
 
 var PIVOTGRID_EXPAND_CLASS = "dx-expand";
 
+
+function applyDashboardZoomCorrection(value) {
+    var zoom = window.visApi().getSheetZoom();
+    var scale = 100 / zoom;
+    return Math.floor(value / scale);
+}
+
 var getRealElementWidth = function(element) {
     var width = 0,
         clientRect;
@@ -22,9 +29,9 @@ var getRealElementWidth = function(element) {
     }
 
     if(width > 0) {
-        return DevExtremeIntegration.ApplyDashboardScaleCorrection(width); //HACK: поправка с учетом скейла дэшборда
+        return applyDashboardZoomCorrection(width); //HACK: поправка с учетом скейла дэшборда
     } else {
-        return DevExtremeIntegration.ApplyDashboardScaleCorrection(element.offsetWidth); //HACK: поправка с учетом скейла дэшборда
+        return applyDashboardZoomCorrection(element.offsetWidth); //HACK: поправка с учетом скейла дэшборда
     }
 };
 
@@ -272,9 +279,9 @@ exports.AreaItem = Class.inherit({
                 height = clientRect.height;
             }
             if(height > 0) {
-                return DevExtremeIntegration.ApplyDashboardScaleCorrection(height); //HACK: поправка с учетом скейла дэшборда
+                return applyDashboardZoomCorrection(height); //HACK: поправка с учетом скейла дэшборда
             } else {
-                return DevExtremeIntegration.ApplyDashboardScaleCorrection(row.offsetHeight); //HACK: поправка с учетом скейла дэшборда
+                return applyDashboardZoomCorrection(row.offsetHeight); //HACK: поправка с учетом скейла дэшборда
             }
         }
         return 0;
